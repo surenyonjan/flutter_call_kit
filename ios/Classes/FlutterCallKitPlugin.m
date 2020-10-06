@@ -516,6 +516,16 @@ continueUserActivity:(NSUserActivity *)userActivity
     }];
 }
 
++(void)reportEndIncomingCall:(NSString *)uuidString
+{
+#ifdef DEBUG
+  NSLog(@"[FlutterCallKitPlugin][reportEndIncomingCall] uuidString = %@", uuidString);
+#endif
+  [FlutterCallKitPlugin initCallKitProvider];
+  NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
+  [sharedProvider reportCallWithUUID:uuid endedAtDate:[NSDate date] reason:CXCallEndedReasonRemoteEnded];
+}
+
 - (void)handleNewIncomingCall:(NSNotification *)notification
 {
     #ifdef DEBUG

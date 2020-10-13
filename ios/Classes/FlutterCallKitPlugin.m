@@ -157,7 +157,7 @@ static CXProvider* sharedProvider;
     NSString* handleType = arguments[@"handleType"];
     NSNumber* video = arguments[@"video"];
     NSString* localizedCallerName = arguments[@"localizedCallerName"];
-    NSString* roomType = arguments["roomType"]
+    NSString* roomType = arguments[@"roomType"];
     [FlutterCallKitPlugin reportNewIncomingCall:uuidString handle:handle handleType:handleType hasVideo:[video boolValue] localizedCallerName:localizedCallerName fromPushKit:NO roomType:roomType];
     result(nil);
 }
@@ -514,7 +514,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [sharedProvider reportNewIncomingCallWithUUID:uuid update:callUpdate completion:^(NSError * _Nullable error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kIncomingCallNotification
                                                             object:self
-                                                          userInfo:@{ @"error": error ? error.localizedDescription : [NSNull null], @"callUUID": uuidString, @"handle": handle, @"localizedCallerName": localizedCallerName, @"fromPushKit": @(fromPushKit), @"roomType": @(roomType)}];
+                                                          userInfo:@{ @"error": error ? error.localizedDescription : [NSNull null], @"callUUID": uuidString, @"handle": handle, @"localizedCallerName": localizedCallerName, @"fromPushKit": @(fromPushKit), @"roomType": roomType}];
     }];
 }
 

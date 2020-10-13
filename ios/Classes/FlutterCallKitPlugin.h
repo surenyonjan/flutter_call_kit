@@ -13,5 +13,6 @@
                      hasVideo:(BOOL)hasVideo
           localizedCallerName:(NSString * _Nullable)localizedCallerName
                   fromPushKit:(BOOL)fromPushKit;
+                     roomType:(NSString *)roomType
 + (void)reportEndIncomingCall:(NSString *)uuidString;
 @end

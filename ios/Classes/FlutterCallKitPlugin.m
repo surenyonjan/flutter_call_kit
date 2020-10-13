@@ -492,6 +492,7 @@ continueUserActivity:(NSUserActivity *)userActivity
                      hasVideo:(BOOL)hasVideo
           localizedCallerName:(NSString * _Nullable)localizedCallerName
                   fromPushKit:(BOOL)fromPushKit
+                  roomType:(NSString *)roomType
 {
 #ifdef DEBUG
     NSLog(@"[FlutterCallKitPlugin][reportNewIncomingCall] uuidString = %@, handle = %@, handleType = %@, hasVideo = %@, localizedCallerName = %@, fromPushKit = %@", uuidString, handle, handleType, @(hasVideo), localizedCallerName, @(fromPushKit) );
@@ -512,7 +513,7 @@ continueUserActivity:(NSUserActivity *)userActivity
     [sharedProvider reportNewIncomingCallWithUUID:uuid update:callUpdate completion:^(NSError * _Nullable error) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kIncomingCallNotification
                                                             object:self
-                                                          userInfo:@{ @"error": error ? error.localizedDescription : [NSNull null], @"callUUID": uuidString, @"handle": handle, @"localizedCallerName": localizedCallerName, @"fromPushKit": @(fromPushKit)}];
+                                                          userInfo:@{ @"error": error ? error.localizedDescription : [NSNull null], @"callUUID": uuidString, @"handle": handle, @"localizedCallerName": localizedCallerName, @"fromPushKit": @(fromPushKit), @"roomType": @(roomType)}];
     }];
 }
 

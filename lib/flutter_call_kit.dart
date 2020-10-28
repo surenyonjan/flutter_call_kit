@@ -361,14 +361,13 @@ class FlutterCallKit {
     });
   }
 
-  /// Checks if there are any active calls on the device and returns a future with a boolean value
-  /// (`true` if there're active calls, `false` otherwise).
+  /// Returns active calls on the device
   ///
-  Future<bool> checkIfBusy() async {
+  Future<int> checkIfBusy() async {
     if (!Platform.isIOS) {
       return null;
     }
-    return await _channel.invokeMethod<void>('checkIfBusy') as bool;
+    return await _channel.invokeMethod<void>('checkIfBusy') as int;
   }
 
   /// Checks if the device speaker is on and returns a promise with a boolean value (`true` if speaker is on, `false` otherwise).

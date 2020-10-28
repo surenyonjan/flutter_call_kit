@@ -92,7 +92,7 @@ static CXProvider* sharedProvider;
 #ifdef DEBUG
         NSLog(@"[FlutterCallKitPlugin][checkIfBusy]");
 #endif
-        result(@(self.callKitCallController.callObserver.calls.count > 0));
+        result(@(self.callKitCallController.callObserver.calls.count));
     }else if ([@"checkSpeaker" isEqualToString:method]) {
 #ifdef DEBUG
         NSLog(@"[FlutterCallKitPlugin][checkSpeaker]");

@@ -194,13 +194,6 @@ static CXProvider* sharedProvider;
     CXTransaction *transaction = [[CXTransaction alloc] initWithAction:endCallAction];
     [CallManager rejectCall: uuidString];
     [self requestTransaction:transaction result:result];
-    // dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    // dispatch_async(queue, ^{
-      // Perform async operation
-      // Call your method/function here
-      // Example:
-      // [CallManager rejectCall: uuidString];
-    // });
 }
 
 - (void)endAllCalls:(FlutterResult)result
@@ -598,14 +591,6 @@ continueUserActivity:(NSUserActivity *)userActivity
 #endif
     NSString *uuidString = [action.callUUID.UUIDString lowercaseString];
     [_channel invokeMethod:kPerformEndCallAction arguments:@{ @"callUUID": uuidString }];
-    // [CallManager rejectCall: uuidString];
-    // dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    // dispatch_async(queue, ^{
-      // Perform async operation
-      // Call your method/function here
-      // Example:
-      // [CallManager rejectCall: uuidString];
-    // });
     [CallManager rejectCall: uuidString];
     [action fulfill];
 }

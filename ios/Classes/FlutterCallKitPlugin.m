@@ -1,6 +1,7 @@
 #import "FlutterCallKitPlugin.h"
 
 #import <AVFoundation/AVAudioSession.h>
+#import "CallManager.h"
 
 #ifdef DEBUG
 static int const OUTGOING_CALL_WAKEUP_DELAY = 10;
@@ -191,8 +192,15 @@ static CXProvider* sharedProvider;
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
     CXEndCallAction *endCallAction = [[CXEndCallAction alloc] initWithCallUUID:uuid];
     CXTransaction *transaction = [[CXTransaction alloc] initWithAction:endCallAction];
-    
+    [CallManager rejectCall: uuidString];
     [self requestTransaction:transaction result:result];
+    // dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    // dispatch_async(queue, ^{
+      // Perform async operation
+      // Call your method/function here
+      // Example:
+      // [CallManager rejectCall: uuidString];
+    // });
 }
 
 - (void)endAllCalls:(FlutterResult)result
@@ -588,7 +596,17 @@ continueUserActivity:(NSUserActivity *)userActivity
 #ifdef DEBUG
     NSLog(@"[FlutterCallKitPlugin][CXProviderDelegate][provider:performEndCallAction]");
 #endif
-    [_channel invokeMethod:kPerformEndCallAction arguments:@{ @"callUUID": [action.callUUID.UUIDString lowercaseString] }];
+    NSString *uuidString = [action.callUUID.UUIDString lowercaseString];
+    [_channel invokeMethod:kPerformEndCallAction arguments:@{ @"callUUID": uuidString }];
+    // [CallManager rejectCall: uuidString];
+    // dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    // dispatch_async(queue, ^{
+      // Perform async operation
+      // Call your method/function here
+      // Example:
+      // [CallManager rejectCall: uuidString];
+    // });
+    [CallManager rejectCall: uuidString];
     [action fulfill];
 }
 

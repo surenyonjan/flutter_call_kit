@@ -12,12 +12,7 @@
 
 #endif /* CallManager_h */
 
-#import <Foundation/Foundation.h>
-#import <sqlite3.h>
-
-@interface CallManager : NSObject {
-  sqlite3 *_database;
-}
+@interface CallManager : NSObject
 
 + (void) rejectCall:(NSString *)uuidString;
 @end

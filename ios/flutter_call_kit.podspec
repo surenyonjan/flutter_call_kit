@@ -18,5 +18,6 @@ A new flutter plugin project.
   s.dependency 'sqlite3', '~> 3.33.0'
 
   s.ios.deployment_target = '8.0'
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 end
 

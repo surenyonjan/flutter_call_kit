@@ -35,7 +35,7 @@ static CallManager *_manager;
     return;
   }
   // Create the request.
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://chat.wolfpack.mobi/api/rejectCall"]];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://chat.mywolfpack.us/api/rejectCall"]];
 
   // Specify that it will be a POST request
   request.HTTPMethod = @"POST";
